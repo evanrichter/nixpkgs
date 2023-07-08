@@ -24298,6 +24298,8 @@ with pkgs;
 
   oneVPL = callPackage ../development/libraries/oneVPL { };
 
+  oneVPL-intel-gpu = callPackage ../development/libraries/oneVPL-intel-gpu { };
+
   oniguruma = callPackage ../development/libraries/oniguruma { };
 
   oobicpl = callPackage ../development/libraries/science/biology/oobicpl { };
