@@ -9193,6 +9193,16 @@ with pkgs;
     inherit (darwin.apple_sdk.frameworks) AppKit;
   };
 
+  imap-server = callPackage ../servers/mail/stalwart/imap {
+    inherit (darwin.apple_sdk.frameworks) Security;
+  };
+
+  jmap-server = callPackage ../servers/mail/stalwart/jmap { };
+
+  smtp-server = callPackage ../servers/mail/stalwart/smtp {
+    inherit (darwin.apple_sdk.frameworks) SystemConfiguration Security;
+  };
+
   jmespath = callPackage ../development/tools/jmespath { };
 
   juicefs = callPackage ../tools/filesystems/juicefs { };
