@@ -9194,10 +9194,12 @@ with pkgs;
   };
 
   imap-server = callPackage ../servers/mail/stalwart/imap {
-    inherit (darwin.apple_sdk.frameworks) Security;
+    inherit (darwin.apple_sdk.frameworks) SystemConfiguration Security;
   };
 
-  jmap-server = callPackage ../servers/mail/stalwart/jmap { };
+  jmap-server = callPackage ../servers/mail/stalwart/jmap {
+    inherit (darwin.apple_sdk.frameworks) SystemConfiguration;
+  };
 
   smtp-server = callPackage ../servers/mail/stalwart/smtp {
     inherit (darwin.apple_sdk.frameworks) SystemConfiguration Security;

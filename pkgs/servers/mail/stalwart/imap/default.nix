@@ -4,6 +4,7 @@
 , rustPlatform
 , nix-update-script
 , Security
+, SystemConfiguration
 , protobuf
 }:
 
@@ -39,7 +40,7 @@ rustPlatform.buildRustPackage {
   PROTOC = "${protobuf}/bin/protoc";
   PROTOC_INCLUDE = "${protobuf}/include";
 
-  buildInputs = lib.optionals stdenv.isDarwin [ Security ];
+  buildInputs = lib.optionals stdenv.isDarwin [ Security SystemConfiguration ];
 
   passthru.updateScript = nix-update-script { };
 
