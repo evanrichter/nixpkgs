@@ -1,5 +1,5 @@
 { lib, stdenv, fetchFromGitHub, cmake, pkg-config, gtest, libdrm, libpciaccess, libva, libX11
-, libXau, libXdmcp, libpthreadstubs, fetchpatch }:
+, libXau, libXdmcp, libpthreadstubs, fetchpatch, onevpl-intel-gpu }:
 
 stdenv.mkDerivation rec {
   pname = "intel-media-sdk";
@@ -26,6 +26,15 @@ stdenv.mkDerivation rec {
     libdrm libva libpciaccess libX11 libXau libXdmcp libpthreadstubs
   ];
   nativeCheckInputs = [ gtest ];
+
+  # For forward compatibility with libvpl.
+  # The onevpl-intel-gpu driver should be loaded automatically based on
+  # available hardware, but to ensure the VPL backend is dispatched at runtime,
+  # set the environment variable INTEL_MEDIA_RUNTIME=ONEVPL
+  # See https://github.com/Intel-Media-SDK/MediaSDK#media-sdk-support-matrix
+  postFixup = ''
+    patchelf --add-needed libmfx-gen.so.1.2 --add-rpath ${onevpl-intel-gpu}/lib $out/lib/libmfx.so
+  '';
 
   cmakeFlags = [
     "-DBUILD_SAMPLES=OFF"
