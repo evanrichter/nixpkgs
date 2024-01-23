@@ -1,4 +1,4 @@
-{ lib, stdenv, fetchFromGitHub, cmake, pkg-config, gtest, libdrm, libpciaccess, libva, libX11
+{ lib, stdenv, fetchFromGitHub, cmake, pkg-config, gtest, libdrm, libpciaccess, libva, libvpl, libX11
 , libXau, libXdmcp, libpthreadstubs, fetchpatch }:
 
 stdenv.mkDerivation rec {
@@ -26,6 +26,11 @@ stdenv.mkDerivation rec {
     libdrm libva libpciaccess libX11 libXau libXdmcp libpthreadstubs
   ];
   nativeCheckInputs = [ gtest ];
+
+  # For forward compatibility with oneVPL.
+  # To ensure the VPL backend is dispatched at runtime, export INTEL_MEDIA_RUNTIME=ONEVPL
+  # See https://github.com/Intel-Media-SDK/MediaSDK#media-sdk-support-matrix
+  runtimeInputs = [ libvpl ];
 
   cmakeFlags = [
     "-DBUILD_SAMPLES=OFF"
