@@ -12,6 +12,7 @@
 , libjpeg
 , libpng
 , libtool
+, libwebp
 , pango
 , bash
 , bison
@@ -52,6 +53,7 @@ stdenv.mkDerivation rec {
   buildInputs = [
     libpng
     libjpeg
+    libwebp
     expat
     fontconfig
     gd
